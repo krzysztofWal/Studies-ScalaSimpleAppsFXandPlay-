@@ -1,0 +1,34 @@
+@()
+@main("Przykładowe dane teleadresowe") {
+
+<div class="jumbotron text-center">
+  <h2>Strona główna</h2>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</div>
+
+<div class="row">
+  <div class="col-sm-2"></div>
+
+  <div class="col-sm-4">
+    <h4 align ="center" >Przeglądnij dane</h4>
+    <p margin="5" align ="center">Przegląnij i modyfikuj wprowadzone wcześniej dane</p>
+    <br>
+    <p align = "center">
+      <a href="@routes.WidgetController.showList" type="button" class="btn btn-primary"><font size = "2" style="align:top">KLIK</font>    <font size="5">&#x261c</font></a>
+    </p>
+
+  </div>
+
+  <div class="col-sm-4">
+    <h4 align ="center">Dodaj</h4>
+    <p align ="center">Dodaj nowy wpis</p>
+    <br>
+    <p align = "center">
+      <a href="@routes.WidgetController.personList" type="button" class="btn btn-primary"><font size = "2" style="align:top">KLIK</font>    <font size="5">&#x261c</font></a>
+    </p>
+  </div>
+
+  <div class="col-sm-2"></div>
+
+</div>
+}

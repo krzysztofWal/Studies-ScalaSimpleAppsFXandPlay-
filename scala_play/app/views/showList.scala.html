@@ -1,0 +1,56 @@
+@(persons: Seq[Person], postUrlDelete : Call, form: Form[DeleteForm.FormData_])(implicit request: MessagesRequestHeader)
+@main("Wyświetl i edytuj kontakty") {
+
+<div class="jumbotron text-center">
+  <h2>Lista kontaktów</h2>
+  <p1></p1>
+  @* Flash shows updates to a page *@
+  @request.flash.data.map{ case (name, value) =>
+  <p1>@name: @value</p1>
+  }
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</div>
+
+<div class="row"align="align-self-center">
+  <div class="col-sm-2" align="center"></div>
+  <div class="col-sm-1" align="center"><b>Imię</b></div>
+  <div class="col-sm-2" align="center"><b>Nazwisko</b></div>
+  <div class="col-sm-2" align="center"><b>Firma</b></div>
+  <div class="col-sm-1" align="center"><b>Nr telefonu</b></div>
+  <div class="col-sm-1" align="center"><b>Usuń</b></div>
+  <div class="col-sm-1" align="center"><b>Edytuj</b></div>
+  <div class="col-sm-2" align="center"></div>
+</div>
+
+@for(w <- persons) {
+  <div class="row" style="padding-top : 10px" align="align-self-center">
+    <div class="col-sm-2" align="center"></div>
+    <div class="col-sm-1" align="center">@w.name</div>
+    <div class="col-sm-2" align="center">@w.surname</div>
+    <div class="col-sm-2" align="center">@w.workplace</div>
+    <div class="col-sm-1" align="center">@w.phone</div>
+    <div class="col-sm-1" align="center">
+      @helper.form(helper.CSRF(postUrlDelete)) {
+      <input type="hidden" id="id_del_1" name="id_to_del" value="@w.id">
+      <input type="hidden" id="id_edit_1" name="id_to_edit" value="-1">
+      <input type="submit" value="klik" class="btn btn-primary">
+      }
+    </div>
+    <div class="col-sm-1" align="center">
+      @helper.form(helper.CSRF(postUrlDelete)) {
+      <input type="hidden" id="id_del_2" name="id_to_del" value="-1">
+      <input type="hidden" id="id_edit_2" name="id_to_edit" value="@w.id">
+      <input type="submit" value="klik" class="btn btn-primary">
+      }
+    </div>
+    <div class="col-sm-2" align="center"></div>
+  </div>
+}
+<br><br>
+<p align ="center"><b>Dodaj nowy wpis</b></p>
+<p align = "center">
+  <a href="@routes.WidgetController.personList" type="button" class="btn btn-primary"><font size = "2" style="align:top">KLIK</font>    <font size="5">&#x261c</font></a>
+</p>
+
+
+}

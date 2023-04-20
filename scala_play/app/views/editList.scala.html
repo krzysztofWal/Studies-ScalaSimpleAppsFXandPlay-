@@ -1,0 +1,60 @@
+@(person: Seq[Person], form: Form[EditForm.FormDataEdit], postUrlCreate: Call, savedValues : Person)(implicit request: MessagesRequestHeader)
+@main("Edytuj kontakt") {
+
+<div class="jumbotron text-center">
+    <h2>Edytuj kontakt</h2>
+    @* Flash shows updates to a page *@
+    @request.flash.data.map{ case (name, value) =>
+        <p1>@name: @value</p1>
+    }
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</div>
+
+@* Global errors are not tied to any particular form field *@
+@if(form.hasGlobalErrors) {
+    @form.globalErrors.map { error: FormError =>
+        <div align="center">
+            @error.key: @error.message
+        </div>
+    }
+}
+
+@helper.form(postUrlCreate) {
+    @helper.CSRF.formField
+    <table align="center">
+        <tr>
+            <td>
+                <b>Imię</b><br>
+                <input type="text" id="name" name="name" value="@savedValues.name" style="padding">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <br><b>Nazwisko</b><br>
+                <input type="text" id="surname" name="surname" value="@savedValues.surname">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <br><b>Firma</b><br>
+                <input type="text" id="workplace" name="workplace" value="@savedValues.workplace">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <br><b>Nr telefonu</b><br>
+                <input type="text" id="phone" name="phone" value="@savedValues.phone">
+            </td>
+        </tr>
+    </table>
+    <br>
+    <input type="hidden" id="id_mem" name="id_mem" value="@savedValues.id">
+    <div class="row" align="center"><button class="btn btn-primary">Gotowe</button></div>
+}
+<br><br>
+<p align ="center"><b>Powrót do listy kontaktów</b></p>
+<p align = "center">
+    <a href="@routes.WidgetController.showList" type="button" class="btn btn-primary"><font size = "2" style="align:top">KLIK</font>    <font size="5">&#x261c</font></a>
+</p>
+
+}
